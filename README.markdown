@@ -63,7 +63,7 @@
 - Serve the Angular app:
   ```bash
   cd frontend
-  ng serve
+  ng serve --proxy-config proxy.conf.json
   ```
 - Access it at `http://localhost:4200`. ✨
 
@@ -87,5 +87,3 @@
 ## 🎉 Contributing
 Feel free to enhance this project! Open an issue or pull request on GitHub.
 
-## ❤️ Credits
-Built with love by your coding bro, powered by xAI’s Grok 3!
