@@ -1,0 +1,14 @@
+<div class="auth-card">
+  <h2 class="auth-title">Sign Up</h2>
+  <p class="auth-switch">
+    Already have an account?
+    <a routerLink="/login" class="auth-link">Login</a>
+  </p>
+  <div *ngIf="errorMessage" class="auth-error">{{ errorMessage }}</div>
+  <form (ngSubmit)="register()" class="auth-form">
+    <input [(ngModel)]="username" name="username" class="auth-input" placeholder="Username" required>
+    <input [(ngModel)]="email" name="email" class="auth-input" placeholder="Email" required>
+    <input [(ngModel)]="password" name="password" type="password" class="auth-input" placeholder="Password" required>
+    <button type="submit" class="auth-btn">Register</button>
+  </form>
+</div>

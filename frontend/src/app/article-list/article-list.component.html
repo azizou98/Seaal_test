@@ -1,0 +1,18 @@
+<div class="article-list">
+  <input [(ngModel)]="search" placeholder="Search by name" (input)="onSearch()" class="search-bar">
+  <table class="article-table">
+    <tr *ngFor="let article of articles">
+      <td><img [src]="article.image_url" width="50" class="article-image"></td>
+      <td>{{article.unique_code}}</td>
+      <td>{{article.name}}</td>
+      <td>{{article.description}}</td>
+      <td>{{article.stock_status}}</td>
+      <td><button [disabled]="article.stock_status === 'out'" (click)="takeOut(article.id)" class="take-out-btn">Take Out</button></td>
+    </tr>
+  </table>
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="page === 1" class="nav-btn">Prev</button>
+    <span>Page {{page}} / {{lastPage}}</span>
+    <button (click)="nextPage()" [disabled]="page === lastPage" class="nav-btn">Next</button>
+  </div>
+</div>
