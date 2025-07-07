@@ -130,3 +130,5 @@ app.post('/articles/take-out', authenticateToken, async (req, res) => {
 
 // 🚀 Launch the Server - Let the inventory magic begin on port 3000.
 app.listen(3000, () => console.log('Server running on port 3000'));
+
+// all work well 
