@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model article_out {
+  id         Int       @id @default(autoincrement())
+  article_id Int
+  user_id    Int
+  timestamp  DateTime? @default(now()) @db.Timestamp(0)
+  articles   articles  @relation(fields: [article_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "article_out_ibfk_1")
+  users      users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "article_out_ibfk_2")
+
+  @@index([article_id], map: "article_id")
+  @@index([user_id], map: "user_id")
+}
+
+model articles {
+  id           Int                    @id @default(autoincrement())
+  unique_code  String                 @unique(map: "unique_code") @db.VarChar(50)
+  name         String                 @db.VarChar(100)
+  description  String?                @db.Text
+  image_url    String?                @db.VarChar(255)
+  stock_status articles_stock_status? @default(in)
+  article_out  article_out[]
+
+  @@index([name], map: "idx_name")
+}
+
+model users {
+  id          Int           @id @default(autoincrement())
+  username    String        @unique(map: "username") @db.VarChar(50)
+  email       String        @unique(map: "email") @db.VarChar(100)
+  password    String        @db.VarChar(255)
+  created_at  DateTime?     @default(now()) @db.Timestamp(0)
+  article_out article_out[]
+}
+
+enum articles_stock_status {
+  in
+  out
+}
